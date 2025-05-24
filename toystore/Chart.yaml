@@ -1,0 +1,5 @@
+apiVersion: v2
+name: toystore
+description: A Helm chart for deploying a toy store application with a backend and frontend
+version: 0.1.0
+appVersion: "1.0"
