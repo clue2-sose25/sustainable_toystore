@@ -3,6 +3,7 @@ name: "sustainable_toystore"
 services:
   # .NET Backend
   backend:
+    image: ghcr.io/clue2-sose25/sustainable_toystore/toystore-backend:latest
     build: ./backend
     ports:
       - "5000:5000"
@@ -11,6 +12,7 @@ services:
 
   # React frontend
   frontend:
+    image: ghcr.io/clue2-sose25/sustainable_toystore/toystore-frontend:latest
     build: ./frontend
     ports:
       - "3000:80"
