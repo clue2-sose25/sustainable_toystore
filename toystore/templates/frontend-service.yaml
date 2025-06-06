@@ -5,7 +5,6 @@ metadata:
   labels:
     app: toystore-frontend
 spec:
-  type: LoadBalancer
   selector:
     app: toystore-frontend
   ports:
