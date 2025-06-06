@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-frontend
+  name: toystore-frontend
   labels:
-    app: {{ .Release.Name }}-frontend
+    app: toystore-frontend
 spec:
   replicas: {{ .Values.frontend.replicas }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-frontend
+      app: toystore-frontend
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-frontend
+        app: toystore-frontend
     spec:
       containers:
       - name: frontend

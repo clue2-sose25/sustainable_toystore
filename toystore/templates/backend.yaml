@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-backend
+  name: toystore-backend
   labels:
-    app: {{ .Release.Name }}-backend
+    app: toystore-backend
 spec:
   replicas: {{ .Values.backend.replicas }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-backend
+      app: toystore-backend
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-backend
+        app: toystore-backend
     spec:
       containers:
       - name: backend
