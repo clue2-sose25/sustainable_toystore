@@ -2,7 +2,7 @@ name: "sustainable_toystore"
 
 services:
   # .NET Backend
-  backend:
+  toystore-backend:
     image: ghcr.io/clue2-sose25/sustainable_toystore/toystore-backend:latest
     build: ./backend
     ports:
@@ -11,12 +11,12 @@ services:
       DOCKER_BUILDKIT: 1
 
   # React frontend
-  frontend:
+  toystore-frontend:
     image: ghcr.io/clue2-sose25/sustainable_toystore/toystore-frontend:latest
     build: ./frontend
     ports:
       - "3000:80"
     depends_on:
-      - backend
+      - toystore-backend
     environment:
       DOCKER_BUILDKIT: 1
