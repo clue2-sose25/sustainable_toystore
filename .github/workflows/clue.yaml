@@ -29,3 +29,4 @@ jobs:
           image-registry: ghcr.io/clue2-sose25/sustainable_toystore
           cluster-config: {{ SECRETS.CLUSTER_CONFIG }}
           variant-name: {{ GITHUB.branch_name }}
+          # threshold: total_energy_consuption > 500
