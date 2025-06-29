@@ -27,6 +27,5 @@ jobs:
           clue-config-path: ./clue/clue-config.yaml
           sut-cofig-path: ./clue/toystore-config.yaml
           image-registry: ghcr.io/clue2-sose25/sustainable_toystore
-          cluster-config: {{ SECRETS.CLUSTER_CONFIG }}
-          variant-name: {{ GITHUB.branch_name }}
+          variants-name: main
           # threshold: total_energy_consuption > 500
