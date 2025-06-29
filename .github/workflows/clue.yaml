@@ -28,4 +28,4 @@ jobs:
           sut-cofig-path: ./clue/toystore-config.yaml
           image-registry: ghcr.io/clue2-sose25/sustainable_toystore
           variants-name: main
-          # threshold: total_energy_consuption > 500
+          #threshold: total_energy_consuption > 500
