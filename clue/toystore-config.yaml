@@ -25,7 +25,7 @@ workloads:
     workload_settings: {}
 
 variants:
-  - name: "baseline"
+  - name: "main"
     description: "Baseline experiment for the toystore application"
     target_branch: "main"
     colocated_workload: true
