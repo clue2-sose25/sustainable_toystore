@@ -25,7 +25,7 @@ jobs:
         uses: clue2-sose25/Clue2/.github/actions/clue-deployer@cicd-improve2
         with:
           clue-config-path: ./clue/clue-config.yaml
-          sut-cofig-path: ./clue/toystore-config.yaml
+          sut-config-path: ./clue/toystore-config.yaml
           image-registry: ghcr.io/clue2-sose25/sustainable_toystore
           variants-name: main
           #threshold: total_energy_consuption > 500
