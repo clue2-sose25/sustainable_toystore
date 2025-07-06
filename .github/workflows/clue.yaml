@@ -36,7 +36,7 @@ jobs:
           clue-config-path: ./clue/clue-config.yaml
           sut-config-path: ./clue/toystore-config.yaml
           image-registry: ghcr.io/clue2-sose25/sustainable_toystore
-          variants-name: main
+          variants-name: baseline
           CLUSTER_PROXY_COMMAND: ${{ vars.CLUSTER_PROXY_COMMAND }}
           SSH_KEY_FILE_PATH:  "~/.ssh/id_rsa"
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
