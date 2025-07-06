@@ -24,7 +24,7 @@ jobs:
       - name: Reconstruct SSH key
         run: |
           mkdir -p /tmp/data
-      - name: Reconstruct SSH key
+      - name: Reconstruct SSH key 
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.TU_CLUSTER_SSH_KEY }}" > ~/.ssh/id_rsa
