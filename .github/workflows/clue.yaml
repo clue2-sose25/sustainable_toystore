@@ -23,8 +23,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Reconstruct SSH key
         run: |
-          echo "${{ secrets.TU_CLUSTER_SSH_KEY }}" > /home/runner/.ssh/id_rsa
-          chmod 600 clue2key
+          mkdir -p ~/.ssh
+          echo "${{ secrets.TU_CLUSTER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           
       - name: Runs CLUE to test the ... 
         uses: clue2-sose25/Clue2/.github/actions/clue-deployer@githubActions-ExternCluster
@@ -34,7 +35,7 @@ jobs:
           image-registry: ghcr.io/clue2-sose25/sustainable_toystore
           variants-name: main
           CLUSTER_PROXY_COMMAND: ${{ github.CLUSTER_PROXY_COMMAND }}
-          SSH_KEY_FILE_PATH:  "/home/runner/.ssh/id_rsa"
+          SSH_KEY_FILE_PATH:  "~/.ssh/id_rsa"
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
           
           #threshold: total_energy_consuption > 500
