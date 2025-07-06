@@ -3,3 +3,4 @@ node_modules
 *.sln
 bin
 .vs
+*.db

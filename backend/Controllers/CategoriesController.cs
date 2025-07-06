@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Data;
 using Backend.Models;
+using Backend.Models.DTOs;
 
 namespace Backend.Controllers
 {
@@ -17,29 +18,77 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Category>>> Get()
+        public async Task<ActionResult<List<CategoryDto>>> Get()
         {
             var categories = await _context.Categories.ToListAsync();
-            return Ok(categories);
+            var categoryDtos = categories.Select(c => new CategoryDto
+            {
+                Id = c.Id,
+                Name = c.Name
+            }).ToList();
+
+            return Ok(categoryDtos);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> Get(int id)
+        public async Task<ActionResult<CategoryDto>> Get(int id)
         {
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
             {
                 return NotFound();
             }
-            return Ok(category);
+
+            var categoryDto = new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+
+            return Ok(categoryDto);
+        }
+
+        [HttpGet("{id}/with-toys")]
+        public async Task<ActionResult<CategoryWithToysDto>> GetWithToys(int id)
+        {
+            var category = await _context.Categories
+                .Include(c => c.Toys)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            var categoryWithToysDto = new CategoryWithToysDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Toys = category.Toys.Select(t => new ToyDto
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    CategoryId = t.CategoryId
+                    // Note: We don't include Category here to avoid circular reference
+                }).ToList()
+            };
+
+            return Ok(categoryWithToysDto);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Category>> Post(Category category)
+        public async Task<ActionResult<CategoryDto>> Post(Category category)
         {
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { id = category.Id }, category);
+
+            var categoryDto = new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+
+            return CreatedAtAction(nameof(Get), new { id = category.Id }, categoryDto);
         }
 
         [HttpPut("{id}")]
