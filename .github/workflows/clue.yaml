@@ -21,12 +21,20 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Reconstruct SSH key
+        run: |
+          echo "${{ secrets.CLUE2_SSH_KEY }}" > /root/.ssh/id_rsa
+          chmod 600 clue2key
+          
       - name: Runs CLUE to test the ...
-        uses: clue2-sose25/Clue2/.github/actions/clue-deployer@cicd-improve2
+        uses: clue2-sose25/Clue2/.github/actions/clue-deployer@githubActions-ExternCluster
         with:
           clue-config-path: ./clue/clue-config.yaml
           sut-config-path: ./clue/toystore-config.yaml
           image-registry: ghcr.io/clue2-sose25/sustainable_toystore
           variants-name: main
+          CLUSTER_PROXY_COMMAND: ${{ github.CLUSTER_PROXY_COMMAND }}
+          SSH_KEY_FILE_PATH: /root/.ssh/id_rsa
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+          
           #threshold: total_energy_consuption > 500
