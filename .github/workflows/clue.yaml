@@ -26,7 +26,7 @@ jobs:
           echo "${{ secrets.CLUE2_SSH_KEY }}" > /root/.ssh/id_rsa
           chmod 600 clue2key
           
-      - name: Runs CLUE to test the ...
+      - name: Runs CLUE to test the ... 
         uses: clue2-sose25/Clue2/.github/actions/clue-deployer@githubActions-ExternCluster
         with:
           clue-config-path: ./clue/clue-config.yaml
