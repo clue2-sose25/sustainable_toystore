@@ -1,15 +1,21 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Backend.Data;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.WriteIndented = true;
+    });
 
-// Add Entity Framework
+// Add Entity Framework with PostgreSQL
 builder.Services.AddDbContext<ToyStoreContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=toystore.db"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add API Explorer and Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -19,7 +25,7 @@ builder.Services.AddSwaggerGen(c =>
     {
         Title = "Toy Store API",
         Version = "v1",
-        Description = "API for managing toy categories and toys with database storage"
+        Description = "API for managing toy categories and toys with PostgreSQL database"
     });
 });
 
@@ -29,7 +35,18 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ToyStoreContext>();
-    context.Database.EnsureCreated();
+
+    // Wait for database to be ready and apply migrations
+    try
+    {
+        context.Database.EnsureCreated();
+        Console.WriteLine("Database created successfully");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Database creation failed: {ex.Message}");
+        throw;
+    }
 }
 
 // Configure the HTTP request pipeline.

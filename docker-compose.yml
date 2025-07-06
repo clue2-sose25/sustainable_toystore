@@ -1,6 +1,23 @@
 name: "sustainable_toystore"
 
 services:
+  # PostgreSQL Database
+  toystore-db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: toystore
+      POSTGRES_USER: toystore_user
+      POSTGRES_PASSWORD: toystore_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - toystore_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U toystore_user -d toystore"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # .NET Backend
   toystore-backend:
     image: ghcr.io/clue2-sose25/sustainable_toystore/toystore-backend:latest
@@ -9,6 +26,11 @@ services:
       - "5000:5000"
     environment:
       DOCKER_BUILDKIT: 1
+      ConnectionStrings__DefaultConnection: "Host=toystore-db;Port=5432;Database=toystore;Username=toystore_user;Password=toystore_password"
+      ASPNETCORE_ENVIRONMENT: Development
+    depends_on:
+      toystore-db:
+        condition: service_healthy
 
   # React frontend
   toystore-frontend:
@@ -20,3 +42,6 @@ services:
       - toystore-backend
     environment:
       DOCKER_BUILDKIT: 1
+
+volumes:
+  toystore_db_data:
