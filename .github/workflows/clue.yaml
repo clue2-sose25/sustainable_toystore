@@ -23,6 +23,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Reconstruct SSH key
         run: |
+          mkdir /app/data
+      - name: Reconstruct SSH key
+        run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.TU_CLUSTER_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
