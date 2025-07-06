@@ -23,7 +23,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Reconstruct SSH key
         run: |
-          mkdir /app/data
+          mkdir -p /app/data
       - name: Reconstruct SSH key
         run: |
           mkdir -p ~/.ssh
