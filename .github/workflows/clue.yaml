@@ -28,7 +28,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.TU_CLUSTER_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          chmod 400 ~/.ssh/id_rsa
           
       - name: Runs CLUE to test the ... 
         uses: clue2-sose25/Clue2/.github/actions/clue-deployer@githubActions-ExternCluster
@@ -40,5 +40,6 @@ jobs:
           CLUSTER_PROXY_COMMAND: ${{ vars.CLUSTER_PROXY_COMMAND }}
           SSH_KEY_FILE_PATH:  "~/.ssh/id_rsa"
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
+          
           
           #threshold: total_energy_consuption > 500
