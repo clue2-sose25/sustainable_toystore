@@ -15,10 +15,6 @@ config:
   wait_after_workloads: 10
   tags: []
 
-helm_replacements:
-  - old_value: "ghcr.io/clue2-sose25/sustainable_toystore"
-    new_value: "registry:5000/clue"
-
 services:
   - name: "teastore-auth"
     resource_limits:
