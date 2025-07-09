@@ -31,7 +31,7 @@ jobs:
           chmod 400 ~/.ssh/id_rsa
    ##### for testing       
       - name: Runs CLUE to test the ... 
-        uses: clue2-sose25/Clue2/.github/actions/clue-deployer@dev
+        uses: clue2-sose25/Clue2/.github/actions/clue-deployer@MovingToClusterWithHelm
         with:
           clue-config-path: ./clue/clue-config.yaml
           sut-config-path: ./clue/toystore-config.yaml
