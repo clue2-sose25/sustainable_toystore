@@ -22,3 +22,7 @@ spec:
         env:
         - name: ASPNETCORE_URLS
           value: "http://+:{{ .Values.backend.service.port }}"
+        - name: ConnectionStrings__DefaultConnection
+          value: "Host=toystore-db;Port=5432;Database={{ .Values.database.name }};Username={{ .Values.database.user }};Password={{ .Values.database.password }}"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
