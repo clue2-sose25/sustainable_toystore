@@ -32,4 +32,5 @@ jobs:
           push: true
           tags: |
             ghcr.io/clue2-sose25/sustainable_toystore/backend:latest
+            ghcr.io/clue2-sose25/sustainable_toystore/backend:${{ github.ref_name }}
             ghcr.io/clue2-sose25/sustainable_toystore/backend:${{ github.sha }}
