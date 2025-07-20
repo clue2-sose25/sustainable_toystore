@@ -21,4 +21,3 @@ database:
   name: toystore
   user: toystore_user
   password: toystore_password
-  storage: 1Gi
