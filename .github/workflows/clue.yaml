@@ -23,10 +23,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Runs CLUE to test the ...
-        uses: clue2-sose25/Clue2/.github/actions/clue-deployer@cicd-improve2
+        uses: clue2-sose25/Clue2/.github/actions/clue-deployer@v0
         with:
           clue-config-path: ./clue/clue-config.yaml
           sut-config-path: ./clue/toystore-config.yaml
           image-registry: ghcr.io/clue2-sose25/sustainable_toystore
-          variants-name: main
+          variants-name: baseline
           #threshold: total_energy_consuption > 500
