@@ -128,3 +128,4 @@ ingress:
   tls: false
 rbac:
   create: false
+sutNamespace: "st-cp25clue2" # should be the same as in sutConfig
