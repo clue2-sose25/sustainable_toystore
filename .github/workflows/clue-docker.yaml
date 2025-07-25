@@ -22,7 +22,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Runs CLUE to test the ...
+      - name: Runs CLUE2 as a docker container
         uses: clue2-sose25/Clue2/.github/actions/clue-docker@v0
         with:
           clue-config-path: ./clue/clue-config.yaml
@@ -30,4 +30,3 @@ jobs:
           image-registry: ghcr.io/clue2-sose25/sustainable_toystore
           variants-name: baseline
           WORKLOADS: shaped
-          #threshold: total_energy_consuption > 500
