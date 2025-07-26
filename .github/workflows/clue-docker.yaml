@@ -23,7 +23,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Runs CLUE2 as a docker container
-        uses: clue2-sose25/Clue2/.github/actions/clue-docker@v0
+        uses: clue2-sose25/Clue2/.github/actions/clue-docker@final
         with:
           clue-config-path: ./clue/clue-config.yaml
           sut-config-path: ./clue/toystore-config.yaml

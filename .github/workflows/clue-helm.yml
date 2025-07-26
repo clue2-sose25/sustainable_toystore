@@ -82,7 +82,7 @@ jobs:
         run: sleep 5
 
       - name: Deploy CLUE2 with Helm action
-        uses: clue2-sose25/Clue2/.github/actions/clue-helm@v0
+        uses: clue2-sose25/Clue2/.github/actions/clue-helm@final
         with:
           kubeconfig-base64:: ${{ secrets.KUBE_CONFIG }}
           chart-path: clue_helm
