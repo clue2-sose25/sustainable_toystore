@@ -3,10 +3,11 @@ name: Run CLUE2
 on:
   push:
     branches:
-      # Disabled for any branch. Use 'clue-helm.yml' instead.
+      # Disabled for any existing branch. Use 'clue-helm.yml' instead.
       # This action is kept as an example of running CLUE in CI-CD pipelines outside the K8s cluster.
       # - baseline
       # - postgres
+      - main
 
 jobs:
   build:
@@ -30,6 +31,5 @@ jobs:
         with:
           clue-config-path: ./clue/clue-config.yaml
           sut-config-path: ./clue/toystore-config.yaml
-          image-registry: ghcr.io/clue2-sose25/sustainable_toystore
           variants-name: baseline
           WORKLOADS: shaped
